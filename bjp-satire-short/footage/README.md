@@ -18,3 +18,7 @@ Avoid: news channel clips (ANI, Aaj Tak, etc.) aur dusre creators ke videos — 
 Commons clips ke liye description mein credit dena (author + license).
 
 Phir render: `python3 build.py`
+
+## Abhi lagi hui clips (Pexels License)
+hook 35446436 · notebandi 15534764 · jumla 16747050 (brightened) · naukri 5125957 ·
+kisan 34994724 · mehengai 4113156 · bonds 20794139 · outro 9593798 — pexels.com/video/<id>

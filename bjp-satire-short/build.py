@@ -228,7 +228,7 @@ class FootageReader:
         self._open()
 
     def _open(self):
-        vf = f"scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},fps={FPS},eq=brightness=-0.08:saturation=1.1"
+        vf = f"scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},fps={FPS},eq=brightness=-0.14:saturation=1.05"
         self.proc = subprocess.Popen(["ffmpeg", "-v", "error", "-i", self.path, "-vf", vf, "-an",
                                       "-f", "rawvideo", "-pix_fmt", "rgb24", "-"], stdout=subprocess.PIPE)
 

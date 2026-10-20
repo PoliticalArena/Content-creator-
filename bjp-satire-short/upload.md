@@ -17,6 +17,16 @@ Sources:
 
 Satire / commentary. Music: original AI-generated track (royalty-free).
 
+Stock footage (Pexels License, free to use):
+- Street, India — md Jahangir alam (pexels.com/video/35446436)
+- Counting ₹500 notes — Parveen Sirswa (pexels.com/video/15534764)
+- Empty wallet — Cameron Gawn (pexels.com/video/16747050)
+- Man with box on stairs — pexels.com/video/5125957
+- Tractor in field — Umar Khan (pexels.com/video/34994724)
+- Rupee notes — pexels.com/video/4113156
+- India Gate — In Old News LLC (pexels.com/video/20794139)
+- Indian flag — Ankur Khandelwal (pexels.com/video/9593798)
+
 #Shorts #Satire #PoliticalSatire #AchheDin #IndianPolitics #VaadeVsHaqeeqat
 
 **Pinned comment:** Sabse bada jumla kaunsa laga? 1️⃣ Notebandi 2️⃣ 15 lakh 3️⃣ 2 crore naukri 4️⃣ Mehengai — number likho 👇
