@@ -585,7 +585,7 @@ def sc_era(L, b, lt):
     a = ease_out(lt / 0.5)
     put(L, emoji_img(b["emoji"], 150), (W // 2, 300), a, ease_back(lt / 0.55), anchor="mm")
     put(L, text_img(b["num"], 54, SAFFRON, FONT_BOLD), (W // 2, 455), a, anchor="mm")
-    put(L, text_img(b["name"].upper(), 130, WHITE), (W // 2 + 80 * (1 - a), 580), a, anchor="mm")
+    put(L, text_img(b["name"].upper(), 120, WHITE, max_w=1800), (W // 2 + 80 * (1 - a), 575), a, anchor="mm")
     d = ImageDraw.Draw(L)
     wbar = int(600 * ease_out((lt - 0.2) / 0.6))
     d.rounded_rectangle((W // 2 - wbar // 2, 670, W // 2 + wbar // 2, 680), 5, fill=SAFFRON + (255,))
@@ -600,8 +600,9 @@ def sc_year(L, b, lt):
     d = ImageDraw.Draw(L)
     d.rounded_rectangle((850, 210, 858, 780), 4, fill=(255, 255, 255, int(70 * a)))
     ah = ease_out((lt - 0.15) / 0.5)
-    put(L, text_img(b["head"], 66, WHITE, FONT_BLACK, max_w=900, align="left"), (900 + 40 * (1 - ah), 210), ah)
-    y = 400 if len(b["head"]) > 26 else 340
+    head = text_img(b["head"], 66, WHITE, FONT_BLACK, max_w=900, align="left")
+    put(L, head, (900 + 40 * (1 - ah), 210), ah)
+    y = 210 + head.height + 40
     for i, (txt, cue) in enumerate(b.get("points", [])):
         ap = ease_out((lt - cue_time(b, cue)) / 0.4)
         if ap <= 0:
