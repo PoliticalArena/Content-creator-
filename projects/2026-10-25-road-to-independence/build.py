@@ -833,7 +833,7 @@ def write_upload(total):
 **Length:** {fmt_ts(total)}  ·  **Format:** 16:9 1920x1080, YouTube long-form
 
 ## Title options
-1. India's Freedom Struggle in {math.ceil(total / 60)} Minutes | Class 8 SST Chapter 2 Animated
+1. India's Freedom Struggle in {int(total // 60)} Minutes | Class 8 SST Chapter 2 Animated
 2. India's Long Road to Independence — Class 8 History Explained (1857–1947)
 3. 90 Years to Freedom: Class 8 SST Ch 2 Full Chapter Animation
 
@@ -894,8 +894,8 @@ def main():
     out = os.path.join(OUT, "road-to-independence.mp4")
     ff = subprocess.Popen([
         "ffmpeg", "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-",
-        "-i", audio, "-c:v", "libx264", "-crf", "19", "-preset", "medium", "-pix_fmt", "yuv420p",
-        "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-shortest", "-movflags", "+faststart", out], stdin=subprocess.PIPE)
+        "-i", audio, "-c:v", "libx264", "-crf", "23", "-preset", "slow", "-tune", "animation", "-pix_fmt", "yuv420p",
+        "-af", "loudnorm=I=-14:TP=-1.5:LRA=11", "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-shortest", "-movflags", "+faststart", out], stdin=subprocess.PIPE)
     with Pool(os.cpu_count()) as pool:
         for k, fb in enumerate(pool.imap(render_bytes, range(nframes), chunksize=16)):
             ff.stdin.write(fb)
