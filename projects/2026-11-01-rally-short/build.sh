@@ -43,25 +43,34 @@ for s in "${segs[@]}"; do
     vs="setpts=$k*PTS,minterpolate=fps=30:mi_mode=blend"
     a=$(python3 -c "print((1/$k)**0.5)"); as="atempo=$a,atempo=$a"
   fi
+  SD=$(python3 -c "print($(ffprobe -v error -show_entries format=duration -of csv=p=0 "$D/raw/Screenrecorder-2026-11-01-$n.mp4")*$k)")
+  # Animation: slow push-in zoom, 0.3s camera shake + white flash at each cut
+  zoom="zoompan=z='1.04+0.08*on/($SD*30)':x='iw/2-iw/zoom/2+if(lt(on,9),18*sin(on*3.2)*(1-on/9),0)':y='ih/2-ih/zoom/2+if(lt(on,9),14*cos(on*2.7)*(1-on/9),0)':d=1:s=1080x1920:fps=30,fade=in:st=0:d=0.18:color=white"
   ffmpeg -v error -y -i "$D/raw/Screenrecorder-2026-11-01-$n.mp4" -filter_complex "
   [0:v]crop=$c,setsar=1,$vs,split[a][b];
   [a]scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,boxblur=30:5,eq=brightness=-0.15[bg];
   [b]scale=1080:1920:force_original_aspect_ratio=decrease[fg];
-  [bg][fg]overlay=(W-w)/2:(H-h)/2,format=yuv420p,
+  [bg][fg]overlay=(W-w)/2:(H-h)/2,$zoom,format=yuv420p,
   drawtext=fontfile=$F:text='Source\: $cred':fontsize=30:fontcolor=white@0.9:box=1:boxcolor=black@0.45:boxborderw=12:x=(w-text_w)/2:y=h-170[v];
   [0:a]aresample=44100,aformat=channel_layouts=stereo,$as[a2]" \
   -map "[v]" -map "[a2]" -c:v libx264 -preset medium -crf 19 -c:a aac -b:a 160k -shortest "$o"
   echo "file '$o'" >> $list
   dur=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$o")
   te=$(ts $(python3 -c "print($t+$dur-0.05)"))
-  pop="\\fscx60\\fscy60\\t(0,160,\\fscx108\\fscy108)\\t(160,260,\\fscx100\\fscy100)"
-  echo "Dialogue: 1,$(ts $t),$te,K,,0,0,0,,{\\fad(80,0)$pop}$l1" >> $ass
-  echo "Dialogue: 0,$(ts $(python3 -c "print($t+0.25)")),$te,Y,,0,0,0,,{\\fad(80,0)$pop}$l2" >> $ass
+  # Text animation: red tag slides in + wiggles; yellow line pops in, then pulses every 1.5s
+  slide="\\an8\\move(-560,110,540,110,0,220)\\frz-3\\t(220,320,\\frz3)\\t(320,420,\\frz-3)\\t(420,500,\\frz0)"
+  pulse=$(python3 -c "
+d=int(($dur-0.3)*1000); out=''; m=1300
+while m+500<d: out+='\\\\t(%d,%d,\\\\fscx112\\\\fscy112)\\\\t(%d,%d,\\\\fscx100\\\\fscy100)'%(m,m+250,m+250,m+500); m+=1500
+print(out)")
+  pop="\\an8\\pos(540,260)\\fad(80,0)\\fscx40\\fscy40\\frz-6\\t(0,180,\\fscx115\\fscy115\\frz2)\\t(180,300,\\fscx100\\fscy100\\frz0)$pulse"
+  echo "Dialogue: 1,$(ts $t),$te,K,,0,0,0,,{$slide}$l1" >> $ass
+  echo "Dialogue: 0,$(ts $(python3 -c "print($t+0.25)")),$te,Y,,0,0,0,,{$pop}$l2" >> $ass
   t=$(python3 -c "print($t+$dur)"); i=$((i+1))
 done
 
 ffmpeg -v error -y -f concat -safe 0 -i $list -c copy $D/edit/joined.mp4
-ffmpeg -v error -y -i $D/edit/joined.mp4 -vf "ass=$ass" -c:v libx264 -preset medium -crf 19 -c:a copy -movflags +faststart $D/exports/short_9x16_1080x1920.mp4
+ffmpeg -v error -y -i $D/edit/joined.mp4 -vf "ass=$ass,drawbox=x=0:y=ih-14:w='iw*t/$t':h=14:color=0xFFD700@0.95:t=fill" -c:v libx264 -preset medium -crf 19 -c:a copy -movflags +faststart $D/exports/short_9x16_1080x1920.mp4
 ffprobe -v error -show_entries format=duration:stream=width,height -of compact $D/exports/short_9x16_1080x1920.mp4
 
 # Thumbnail: red-flag "Toofan" crowd frame + bold text
