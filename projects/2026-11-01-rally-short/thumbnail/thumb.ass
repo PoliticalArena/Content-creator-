@@ -1,0 +1,16 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 2
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Big,FreeSerif,215,&H0000FFFF,&H00FFFFFF,&H00000000,&HAA000000,1,0,0,0,100,100,0,0,1,14,8,8,30,30,150,1
+Style: Sub,DejaVu Sans,80,&H00FFFFFF,&H00FFFFFF,&H000000D0,&HAA000000,1,0,0,0,100,100,3,0,3,20,0,8,30,30,430,1
+Style: Draw,DejaVu Sans,20,&H00FFFFFF,&H00FFFFFF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,7,0,0,0,1
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 2,0:00:00.00,0:00:05.00,Big,,0,0,0,,इतनी भीड़?!
+Dialogue: 2,0:00:00.00,0:00:05.00,Sub,,0,0,0,,DRONE SHOT
+Dialogue: 1,0:00:00.00,0:00:05.00,Draw,,0,0,0,,{\an7\pos(0,0)\1a&HFF&\bord14\3c&H0000FF&\shad0\p1}m 200 1450 b 200 1250 880 1250 880 1450 b 880 1650 200 1650 200 1450{\p0}
+Dialogue: 1,0:00:00.00,0:00:05.00,Draw,,0,0,0,,{\an7\pos(0,0)\1c&H00FFFF&\bord7\3c&H000000&\shad5\p1}m 930 700 l 990 760 l 790 1000 l 850 1050 l 690 1110 l 720 940 l 760 990 l 930 700{\p0}
