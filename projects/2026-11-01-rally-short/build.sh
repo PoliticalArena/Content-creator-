@@ -10,12 +10,12 @@ F=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf
 # name | crop w:h:x:y | slow factor (1 = normal) | credit | line1 (yellow) | line2 (white)
 SLOW=1.888   # stretches 25.4s of crowd footage to ~48s -> total ~59s
 segs=(
-"16-02-02-161|1000:1110:140:480|$SLOW|@IndianNationalCongress|इतनी भीड़?!|Drone से देखो"
-"15-59-32-585|1020:1200:130:480|$SLOW|@Couple.Comrade|रामलीला मैदान|पूरा FULL!"
-"15-57-44-15|1020:1540:130:100|$SLOW|@IndianNationalCongress|हर तरफ़|झंडे ही झंडे"
-"15-59-46-736|1020:525:130:1075|$SLOW|@INCUttarPradesh|चलो दिल्ली|आरंभ हो चुका"
+"16-02-02-161|1000:1110:140:480|$SLOW|@IndianNationalCongress|रुको! ये देखो…|दिल्ली में इतनी भीड़?!"
+"15-59-32-585|1020:1200:130:480|$SLOW|@Couple.Comrade|यकीन नहीं होगा!|रामलीला मैदान FULL"
+"15-57-44-15|1020:1540:130:100|$SLOW|@IndianNationalCongress|LAST तक देखना!|हर तरफ़ झंडे ही झंडे"
+"15-59-46-736|1020:525:130:1075|$SLOW|@INCUttarPradesh|अब होगा बड़ा खेल?|चलो दिल्ली आरंभ!"
 "16-01-03-348|1020:1030:130:570|$SLOW|@IndianYouthCongress|ये भीड़ नहीं…|तूफ़ान है!"
-"16-00-19-775|880:530:130:625|1|@StreekaalStreeKaSamay / INC|ये तो बस|शुरुआत है…"
+"16-00-19-775|880:530:130:625|1|@StreekaalStreeKaSamay / INC|सरकार की टेंशन बढ़ी?|ये तो बस शुरुआत है…"
 )
 
 ass=$D/edit/text.ass
@@ -24,10 +24,11 @@ cat > $ass <<'ASS'
 ScriptType: v4.00+
 PlayResX: 1080
 PlayResY: 1920
-WrapStyle: 2
+WrapStyle: 0
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: T,FreeSerif,118,&H0000FFFF,&H00FFFFFF,&H00000000,&H99000000,1,0,0,0,100,100,0,0,1,10,5,8,30,30,120,1
+Style: K,FreeSerif,84,&H00FFFFFF,&H00FFFFFF,&H000000D0,&H99000000,1,0,0,0,100,100,0,0,3,16,0,8,30,30,110,1
+Style: Y,FreeSerif,124,&H0000FFFF,&H00FFFFFF,&H00000000,&H99000000,1,0,0,0,100,100,0,0,1,11,6,8,30,30,260,1
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 ASS
@@ -52,9 +53,10 @@ for s in "${segs[@]}"; do
   -map "[v]" -map "[a2]" -c:v libx264 -preset medium -crf 19 -c:a aac -b:a 160k -shortest "$o"
   echo "file '$o'" >> $list
   dur=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$o")
-  body="{\\fad(120,0)\\fscx65\\fscy65\\t(0,180,\\fscx105\\fscy105)\\t(180,280,\\fscx100\\fscy100)}$l1"
-  [ -n "$l2" ] && body="$body\\N{\\c&HFFFFFF&}$l2"
-  echo "Dialogue: 0,$(ts $t),$(ts $(python3 -c "print($t+$dur-0.05)")),T,,0,0,0,,$body" >> $ass
+  te=$(ts $(python3 -c "print($t+$dur-0.05)"))
+  pop="\\fscx60\\fscy60\\t(0,160,\\fscx108\\fscy108)\\t(160,260,\\fscx100\\fscy100)"
+  echo "Dialogue: 1,$(ts $t),$te,K,,0,0,0,,{\\fad(80,0)$pop}$l1" >> $ass
+  echo "Dialogue: 0,$(ts $(python3 -c "print($t+0.25)")),$te,Y,,0,0,0,,{\\fad(80,0)$pop}$l2" >> $ass
   t=$(python3 -c "print($t+$dur)"); i=$((i+1))
 done
 
