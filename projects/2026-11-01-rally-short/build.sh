@@ -27,5 +27,40 @@ for s in "${segs[@]}"; do
   -map "[v]" -map "[a2]" -c:v libx264 -preset medium -crf 19 -c:a aac -b:a 160k -shortest "$o"
   echo "file '$o'" >> $list; i=$((i+1))
 done
-ffmpeg -v error -y -f concat -safe 0 -i $list -c copy -movflags +faststart $D/exports/short_9x16_1080x1920.mp4
+ffmpeg -v error -y -f concat -safe 0 -i $list -c copy $D/edit/joined.mp4
+
+# Bold on-screen text: one card per segment (line1 yellow | line2 white), rendered with libass for correct Devanagari shaping
+texts=(
+"रामलीला मैदान|1 नवंबर — दिल्ली"
+"जनसैलाब उमड़ पड़ा|जहाँ तक नज़र जाए"
+"हर तरफ़|झंडे ही झंडे"
+"चलो दिल्ली|आरंभ हो चुका"
+"तूफ़ान|"
+"ये तो बस|शुरुआत है…"
+)
+ass=$D/edit/text.ass
+cat > $ass <<'ASS'
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 2
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: T,FreeSerif,96,&H0000FFFF,&H00FFFFFF,&H00000000,&H99000000,1,0,0,0,100,100,0,0,1,8,4,8,40,40,150,1
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+ASS
+t=0
+for k in "${!texts[@]}"; do
+  dur=$(ffprobe -v error -show_entries format=duration -of csv=p=0 $D/edit/$k.mp4)
+  IFS='|' read l1 l2 <<< "${texts[$k]}"
+  body="{\\fad(120,0)\\fscx70\\fscy70\\t(0,180,\\fscx100\\fscy100)}$l1"
+  [ -n "$l2" ] && body="$body\\N{\\c&HFFFFFF&}$l2"
+  python3 -c "import sys
+def f(x): x=float(x); return '%d:%02d:%05.2f'%(x//3600,x%3600//60,x%60)
+print('Dialogue: 0,%s,%s,T,,0,0,0,,%s'%(f(sys.argv[1]),f(float(sys.argv[1])+float(sys.argv[2])-0.05),sys.argv[3]))" "$t" "$dur" "$body" >> $ass
+  t=$(python3 -c "print($t+$dur)")
+done
+ffmpeg -v error -y -i $D/edit/joined.mp4 -vf "ass=$ass" -c:v libx264 -preset medium -crf 19 -c:a copy -movflags +faststart $D/exports/short_9x16_1080x1920.mp4
 ffprobe -v error -show_entries format=duration:stream=width,height -of compact $D/exports/short_9x16_1080x1920.mp4
