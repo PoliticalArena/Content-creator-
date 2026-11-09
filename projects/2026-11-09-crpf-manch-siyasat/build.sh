@@ -28,7 +28,7 @@ $V,split=5[a][b][c][d][e];
 [a]trim=8:14,setpts=PTS-STARTPTS[s1];[b]trim=41.2:53.2,setpts=PTS-STARTPTS[s2];
 [c]trim=24:31,setpts=PTS-STARTPTS[s3a];[d]trim=85:92,setpts=PTS-STARTPTS[s3b];
 [s1][s2][s3a][s3b]concat=n=4,fps=30,scale=960:540:flags=lanczos,eq=contrast=1.05:saturation=0.9,unsharp=5:5:0.6[top];
-[e]trim=92:102,setpts=PTS-STARTPTS+32/TB,crop=431:404:165:0,scale=960:900:flags=lanczos,eq=contrast=1.05:saturation=0.9,unsharp=5:5:0.6,fps=30[face];
+[e]trim=92:102,setpts=PTS-STARTPTS+32/TB,crop=420:394:168:4,scale=960:900:flags=lanczos,eq=contrast=1.05:saturation=0.9,unsharp=5:5:0.6,fps=30[face];
 color=black:s=1080x1920:r=30:d=42[bg];
 [bg][top]overlay=60:330:eof_action=pass[t1];[t1][face]overlay=60:250:enable='gte(t,32)':eof_action=pass[t2];
 [t2][1:v]overlay=shortest=1,format=yuv420p[v];
