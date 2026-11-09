@@ -11,7 +11,7 @@ D="$(cd "$(dirname "$0")" && pwd)"; W=$D/edit; mkdir -p "$W" "$D/exports"; RAW=$
 [ -f "$RAW" ] || curl -sSL -o "$RAW" "https://drive.usercontent.google.com/download?id=1cjugGQ_mg_3EREmHAeBBUr62YW979z07&export=download&confirm=t"
 
 # 1) graphics overlay frames (transparent PNG), 4 parallel workers
-N=1260; for k in 0 1 2 3; do FROM=$((k*N/4)) TO=$(((k+1)*N/4)) node "$D/render.cjs" overlay "$W/ov" 30 42 & done; wait
+[ -f "$W/ov/01259.png" ] || { N=1260; for k in 0 1 2 3; do FROM=$((k*N/4)) TO=$(((k+1)*N/4)) node "$D/render.cjs" overlay "$W/ov" 30 42 & done; wait; }
 
 # 2) BGM: low drone (55/82.4/110 Hz swells) + soft impacts on scene cuts
 hit(){ echo "gt(t,$1)*exp(-(t-$1)*3)*sin(2*PI*42*(t-$1))*0.9"; }
@@ -28,7 +28,7 @@ $V,split=5[a][b][c][d][e];
 [a]trim=8:14,setpts=PTS-STARTPTS[s1];[b]trim=41.2:53.2,setpts=PTS-STARTPTS[s2];
 [c]trim=24:31,setpts=PTS-STARTPTS[s3a];[d]trim=85:92,setpts=PTS-STARTPTS[s3b];
 [s1][s2][s3a][s3b]concat=n=4,fps=30,scale=960:540:flags=lanczos,eq=contrast=1.05:saturation=0.9,unsharp=5:5:0.6[top];
-[e]trim=92:102,setpts=PTS-STARTPTS,crop=431:404:165:0,scale=960:900:flags=lanczos,eq=contrast=1.05:saturation=0.9,unsharp=5:5:0.6,fps=30[face];
+[e]trim=92:102,setpts=PTS-STARTPTS+32/TB,crop=431:404:165:0,scale=960:900:flags=lanczos,eq=contrast=1.05:saturation=0.9,unsharp=5:5:0.6,fps=30[face];
 color=black:s=1080x1920:r=30:d=42[bg];
 [bg][top]overlay=60:330:eof_action=pass[t1];[t1][face]overlay=60:250:enable='gte(t,32)':eof_action=pass[t2];
 [t2][1:v]overlay=shortest=1,format=yuv420p[v];
@@ -40,4 +40,4 @@ color=black:s=1080x1920:r=30:d=42[bg];
 # 4) green-screen overlay version
 ffmpeg -v error -y -f lavfi -i "color=0x00FF00:s=1080x1920:r=30:d=42" -framerate 30 -i "$W/ov/%05d.png" \
   -filter_complex "[0][1]overlay=shortest=1,format=yuv420p" -c:v libx264 -preset medium -crf 16 -movflags +faststart "$D/exports/overlay_greenscreen.mp4"
-rm -rf "$W"
+[ -n "$KEEP_FRAMES" ] || rm -rf "$W"
