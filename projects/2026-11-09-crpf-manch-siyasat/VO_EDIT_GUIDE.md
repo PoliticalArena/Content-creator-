@@ -1,37 +1,36 @@
-# CRPF मंच और सियासत — 42s Short (9:16)
+# CRPF मंच और सियासत — 59s Short (9:16)
 
 **Footage:** Drive `Modi` (1cjugGQ_mg_3EREmHAeBBUr62YW979z07). It's an ANI clip reposted by @saket.gokhale. The build crops out the repost caption and blurs the IG watermark. The ANI bug stays on screen and is credited as "वीडियो: ANI".
 
 ## Files
 | File | Use |
 |---|---|
-| `exports/final_noVO_9x16.mp4` | **Main file.** Graphics, footage, PM's original audio (6–18s) and BGM. Add your VO on top and post. |
-| `exports/overlay_greenscreen.mp4` | Graphics only, with the slots in pure green. Chroma-key it over your own clips or face-cam in CapCut. |
-| `exports/bgm_drone.m4a` | 42s ambient drone, generated here, so no copyright claims. Already mixed into the main file. |
+| `exports/final_9x16.mp4` | **Ready to post.** 59s with your VO (take 09-11-2026 10:13), the PM's original audio and BGM. |
+| `exports/final_noVO_9x16.mp4` | The same video without VO, in case you re-record. |
+| `exports/overlay_greenscreen.mp4` | Graphics only, with green slots for chroma-keying your own clips or face-cam. |
+| `exports/bgm_drone.m4a` | 59s generated ambient drone (no copyright claims). |
 
-## Voiceover: record 3 takes and place them at these times
-**0:06–0:18 has no VO.** The PM's own words play here. The real audio is stronger proof than a paraphrase.
-
-| Time | Screen | VO (read slow and steady, analytical tone) |
+## Timeline (cut to your VO take)
+| Time | Screen | Audio |
 |---|---|---|
-| **0:00–0:06** | Jawans → PM · "CRPF मंच और सियासत?" | "देश के सुरक्षा बलों की वर्दी अराजनीतिक होती है… लेकिन जब उन्हीं के मंच से राजनीतिक विरोधियों को घेरा जाए, तो सवाल उठना लाज़िमी है।" |
-| 0:06–0:18 | PM audio: "कई राजनीतिक दलों में… दिमागी नक्सलियों ने अपनी घुसपैठ कर ली है" | — *(silent)* |
-| **0:18–0:32** | संसद/चुनाव → जवान vs सियासत → तटस्थता? | "लोकतंत्र में दलों और विचारधाराओं की लड़ाई संसद और चुनाव के मैदान में लड़ी जाती है। जब देश के सबसे बड़े संवैधानिक पद से, जवानों के सामने, यह कहा जाए कि राजनीतिक दलों में 'दिमागी नक्सलियों' ने घुसपैठ कर ली है — तो क्या यह संस्थाओं की तटस्थता पर सवाल नहीं खड़ा करता?" |
-| **0:32–0:42** | Poll · "आपकी क्या राय है?" | "नक्सलवाद के खिलाफ लड़ना जवानों का कर्तव्य है, लेकिन राजनीतिक विरोधियों से निपटना लोकतंत्र का काम। क्या सुरक्षा बलों के कार्यक्रमों में ऐसी बातें होनी चाहिए? अपनी राय कमेंट्स में बताइए।" |
+| 0:00–0:08.6 | "CRPF मंच और सियासत?" + the speech footage | VO: "देश के सुरक्षा बलों की वर्दी… सवाल उठना लाज़िमी है" |
+| 0:08.6–0:20.6 | The quote, revealed line by line | **PM's original audio** |
+| 0:20.6–0:39.3 | संसद/चुनाव → संवैधानिक पद → 'दिमागी नक्सली'? → तटस्थता? | VO: "लोकतंत्र में दलों… सवाल नहीं खड़ा करता" |
+| 0:39.3–0:59 | Close-up · poll · Subscribe | VO: "नक्सलवाद के खिलाफ… share करें" |
+
+Your take is 47s long. Rather than speeding it up, I stretched the video to 59s to fit it.
 
 **I changed one line in the Gemini script (0:18–0:32).** The PM did **not** call parties "दिमागी नक्सली". His words were "कई राजनीतिक दलों में, अलग-अलग संगठनों में भी इन दिमागी नक्सलियों ने अपनी घुसपैठ कर ली है… हमें इन्हें पहचानना है, परास्त करना है" (raw 41–60s). The VO above says what he actually said, so the video can't be called a misquote. "बस्तर" was also dropped because the clip doesn't confirm the location. Add it back only if you have a source for it.
 
 Optional stronger hook (0:00–0:03): *"प्रधानमंत्री ने CRPF जवानों से कहा — इन्हें पहचानो, परास्त करो। 'इन्हें' कौन?"*
 
-## CapCut steps
-1. Import `final_noVO_9x16.mp4` and add your VO takes at 0:00, 0:18 and 0:32.
-2. Mix: VO at **0 dB** and the video track at **−6 dB**. Keep the 6–18s PM audio at full volume.
-3. Auto-captions: generate them from **your VO only**. Keep them off 6–18s, where the on-screen quote already acts as captions. Place them at y ≈ 1500–1600.
-4. Face-cam for 32–42s (optional): put your close-up on the main track. Overlay `overlay_greenscreen.mp4`, then Chroma key → green, intensity ~40. The slot is x60 y250, 960×900.
+## CapCut steps (optional, since `final_9x16.mp4` is already mixed)
+1. Auto-captions: generate them, then delete the ones between 0:08.6 and 0:20.6, where the on-screen quote already acts as captions. Place them at y ≈ 1500–1600.
+2. Face-cam for 39.3–59s (optional): put your close-up on the main track. Overlay `overlay_greenscreen.mp4`, then Chroma key → green, intensity ~40.
 
 ## Slot map (for overlay_greenscreen.mp4)
-- 0–32s: x60 y330, 960×540 (16:9)
-- 32–42s: x60 y250, 960×900
+- 0–39.3s: x60 y330, 960×540 (16:9)
+- 39.3–59s: x60 y250, 960×900
 
 ## Post copy
 - **Title:** CRPF मंच से सियासत? PM के 'दिमागी नक्सली' बयान पर सवाल
@@ -39,8 +38,8 @@ Optional stronger hook (0:00–0:03): *"प्रधानमंत्री न
 - **Hashtags:** #CRPF #PMModi #UrbanNaxal #Democracy #IndianPolitics #Shorts
 
 ## Repurpose
-- **Carousel (4 slides):** quote → "संसद vs जवानों का मंच" → "संस्थाओं की तटस्थता?" → poll. Use frames from 0:15, 0:24, 0:30 and 0:40.
-- **X/Twitter:** the verbatim quote plus your one-line question, with the 12s PM clip attached.
+- **Carousel (4 slides):** quote → "संसद vs जवानों का मंच" → "संस्थाओं की तटस्थता?" → poll. Use frames from 0:19, 0:29, 0:37 and 0:50.
+- **X/Twitter:** the verbatim quote plus your one-line question, with the 12s PM clip (0:08.6–0:20.6) attached.
 - **Community post poll:** "क्या सुरक्षा बलों के कार्यक्रम में राजनीतिक बयान होने चाहिए? हाँ / नहीं"
 
 ## Rebuild

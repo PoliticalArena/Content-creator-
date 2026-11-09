@@ -41,7 +41,7 @@ body.overlay .ph{display:none}
 .tag{position:absolute;left:24px;bottom:24px;background:rgba(10,12,16,.82);border-left:8px solid var(--red);padding:8px 22px 10px;font-size:34px;font-weight:700}
 
 /* chrome */
-#bar{left:0;top:0;height:10px;width:0;background:var(--red);animation:bar 42s linear 0s both}
+#bar{left:0;top:0;height:10px;width:0;background:var(--red);animation:bar 59s linear 0s both}
 #chip{left:60px;top:150px;display:flex;align-items:center;gap:14px;font-size:34px;font-weight:700;letter-spacing:1px;color:var(--ink)}
 #chip i{width:18px;height:18px;border-radius:50%;background:var(--red);animation:blink 1s steps(2) infinite}
 #disc{left:0;right:0;top:1560px;text-align:center;font-size:26px;color:var(--mute)}
@@ -75,84 +75,77 @@ body.overlay .ph{display:none}
 </style>
 </head>
 <body>
-<!-- ====== SLOT GEOMETRY (also documented in VO_EDIT_GUIDE.md) ======
-  Slot A  0–18s  : x60 y330 960x540 (16:9)  → PM/CRPF camp footage, then speech clip
-  Slot C 18–32s  : x60 y330 960x540 (16:9)  → संसद / प्रस्तावना / सुरक्षा बल B-roll
-  Slot D 32–42s  : x60 y250 960x900          → आपका फेस-कैम क्लोज़-अप
+<!-- ====== TIMELINE (59s, cut to the creator's VO take 2026-11-09 10:13) ======
+  S1 hook   0–8.6   slot A x60 y330 960x540   VO part 1
+  S2 clip   8.6–20.6 slot A                   PM original audio (raw 41.2–53.2)
+  S3 argue 20.6–39.3 slot A                   VO part 2
+  S4 CTA   39.3–59   slot D x60 y250 960x900  VO part 3 + subscribe
 -->
+<div class="ph show" style="left:60px;top:330px;width:960px;height:540px;--in:0s;--out:8.6s">▶ CRPF कार्यक्रम फुटेज</div>
+<div class="ph show" style="left:60px;top:330px;width:960px;height:540px;--in:8.6s;--out:20.6s">▶ भाषण क्लिप</div>
+<div class="ph show" style="left:60px;top:330px;width:960px;height:540px;--in:20.6s;--out:39.3s">▶ B-roll</div>
+<div class="ph show" style="left:60px;top:250px;width:960px;height:900px;--in:39.3s;--out:60s">● क्लोज़-अप</div>
 
-<!-- placeholders (preview only, sit under the bg holes) -->
-<div class="ph show" style="left:60px;top:330px;width:960px;height:540px;--in:0s;--out:6s">▶ PM का CRPF कैंप फुटेज<small>0–6s · 16:9 क्लिप यहाँ</small></div>
-<div class="ph show" style="left:60px;top:330px;width:960px;height:540px;--in:6s;--out:18s">▶ भाषण क्लिप ("दिमागी नक्सली…")<small>6–18s · असली ऑडियो धीमा रखें</small></div>
-<div class="ph show" style="left:60px;top:330px;width:960px;height:540px;--in:18s;--out:32s">▶ संसद / प्रस्तावना / जवान B-roll<small>18–32s</small></div>
-<div class="ph show" style="left:60px;top:250px;width:960px;height:900px;--in:32s;--out:43s">● आपका फेस-कैम क्लोज़-अप<small>32–42s · आँखें कैमरे में</small></div>
-
-<!-- backgrounds with holes -->
-<div class="bg show" id="bgA" style="--in:0s;--out:32s"></div>
-<div class="bg show" id="bgD" style="--in:32s"></div>
+<div class="bg show" id="bgA" style="--in:0s;--out:39.3s"></div>
+<div class="bg show" id="bgD" style="--in:39.3s"></div>
 <div class="grain"></div>
 
-<!-- frames -->
-<div class="frame t" style="left:60px;top:330px;width:960px;height:540px;--a:fade;--in:0s;--out:31.75s"></div>
-<div class="frame t" style="left:60px;top:250px;width:960px;height:900px;--a:fade;--in:32s"></div>
+<div class="frame t" style="left:60px;top:330px;width:960px;height:540px;--a:fade;--in:0s;--out:39.05s"></div>
+<div class="frame t" style="left:60px;top:250px;width:960px;height:900px;--a:fade;--in:39.3s"></div>
 
-<!-- chrome -->
 <div id="bar" class="abs"></div>
-<div id="chip" class="abs t" style="--a:left;--in:.1s;--out:31.75s"><i></i>विश्लेषण</div>
+<div id="chip" class="abs t" style="--a:left;--in:.1s;--out:39.05s"><i></i>विश्लेषण</div>
 <div id="disc" class="abs t" style="--a:fade;--in:.6s">विश्लेषणात्मक टिप्पणी · सार्वजनिक भाषण पर आधारित</div>
 
-<!-- ================= S1 · HOOK 0–6s ================= -->
-<div class="abs t" style="left:60px;top:330px;width:960px;height:540px;--a:fade;--in:.2s;--out:5.75s"><div class="tag">CRPF कार्यक्रम · वीडियो: ANI</div></div>
-<div class="abs center h1 t" style="top:930px;--a:slam;--in:.3s;--out:5.75s">CRPF मंच</div>
-<div class="abs center h1 red t" style="top:1080px;--a:slam;--in:.9s;--out:5.75s">और सियासत?</div>
-<div class="abs center h3 t" style="top:1290px;--a:up;--in:3.4s;--out:5.75s"><span class="hl">वर्दी अराजनीतिक</span> होती है…</div>
-<div class="abs center h3 amb t" style="top:1390px;--a:up;--in:4.6s;--out:5.75s">तो सवाल उठना लाज़िमी है</div>
+<!-- ================= S1 · HOOK 0–8.6 ================= -->
+<div class="abs t" style="left:60px;top:330px;width:960px;height:540px;--a:fade;--in:.2s;--out:8.35s"><div class="tag">CRPF कार्यक्रम · वीडियो: ANI</div></div>
+<div class="abs center h1 t" style="top:930px;--a:slam;--in:.3s;--out:8.35s">CRPF मंच</div>
+<div class="abs center h1 red t" style="top:1080px;--a:slam;--in:.9s;--out:8.35s">और सियासत?</div>
+<div class="abs center h3 t" style="top:1260px;--a:up;--in:1.6s;--out:8.35s"><span class="hl">वर्दी अराजनीतिक</span> होती है…</div>
+<div class="abs center h3 t" style="top:1350px;--a:up;--in:4.4s;--out:8.35s">…मंच से <span class="red">विरोधियों पर निशाना?</span></div>
+<div class="abs center h3 amb t" style="top:1450px;font-size:48px;--a:up;--in:6.6s;--out:8.35s">सवाल उठना लाज़िमी है</div>
 
-<!-- ================= S2 · THE CLIP 6–18s (source audio plays: raw 41.2–53.2s) ================= -->
-<div class="abs t" style="left:60px;top:330px;width:960px;height:540px;--a:fade;--in:6.1s;--out:17.75s"><div class="tag">भाषण का अंश · वीडियो: ANI</div></div>
-<div class="abs t" style="left:60px;top:890px;font-weight:900;font-size:200px;line-height:1;color:var(--red);--a:fade;--in:6.1s;--out:17.75s">“</div>
+<!-- ================= S2 · THE CLIP 8.6–20.6 (PM audio) ================= -->
+<div class="abs t" style="left:60px;top:330px;width:960px;height:540px;--a:fade;--in:8.7s;--out:20.35s"><div class="tag">भाषण का अंश · वीडियो: ANI</div></div>
+<div class="abs t" style="left:60px;top:890px;font-weight:900;font-size:200px;line-height:1;color:var(--red);--a:fade;--in:8.7s;--out:20.35s">“</div>
 <div class="abs" style="left:90px;right:60px;top:985px;font-weight:900;font-size:78px;line-height:1.22">
-  <div class="t" style="--a:up;--in:6.2s;--out:17.75s">कई राजनीतिक दलों में,</div>
-  <div class="t" style="--a:up;--in:9.3s;--out:17.75s">अलग-अलग संगठनों में भी</div>
-  <div class="t" style="--a:up;--in:12.3s;--out:17.75s"><span class="hl">दिमागी नक्सलियों</span> ने</div>
-  <div class="t" style="--a:up;--in:15.1s;--out:17.75s">अपनी घुसपैठ कर ली है”</div>
+  <div class="t" style="--a:up;--in:8.8s;--out:20.35s">कई राजनीतिक दलों में,</div>
+  <div class="t" style="--a:up;--in:11.9s;--out:20.35s">अलग-अलग संगठनों में भी</div>
+  <div class="t" style="--a:up;--in:14.9s;--out:20.35s"><span class="hl">दिमागी नक्सलियों</span> ने</div>
+  <div class="t" style="--a:up;--in:17.7s;--out:20.35s">अपनी घुसपैठ कर ली है”</div>
 </div>
-<div class="abs t" style="left:90px;right:60px;top:1395px;font-size:30px;color:var(--mute);--a:fade;--in:15.6s;--out:17.75s">— PM मोदी, CRPF जवानों को संबोधित करते हुए</div>
-<div class="abs t h3 amb" style="left:90px;right:60px;top:1450px;font-size:46px;--a:up;--in:16.3s;--out:17.75s">“हमें इन्हें पहचानना है, परास्त करना है”</div>
+<div class="abs t" style="left:90px;right:60px;top:1395px;font-size:30px;color:var(--mute);--a:fade;--in:18.2s;--out:20.35s">— PM मोदी, CRPF जवानों को संबोधित करते हुए</div>
+<div class="abs t h3 amb" style="left:90px;right:60px;top:1450px;font-size:46px;--a:up;--in:18.9s;--out:20.35s">“हमें इन्हें पहचानना है, परास्त करना है”</div>
 
-<!-- ================= S3 · THE ARGUMENT 18–32s ================= -->
-<div class="abs t" style="left:60px;top:330px;width:960px;height:540px;--a:fade;--in:18.1s;--out:31.75s"><div class="tag">लोकतंत्र का मैदान</div></div>
-<div class="abs center t" style="top:1400px;font-size:74px;font-weight:900;color:rgba(243,239,230,.06);--a:fade;--in:18.2s;--out:26.2s">हम, भारत के लोग…</div>
-<div class="abs center t" style="top:1400px;font-size:74px;font-weight:900;color:rgba(243,239,230,.06);--a:fade;--in:29.2s;--out:31.75s">हम, भारत के लोग…</div>
+<!-- ================= S3 · THE ARGUMENT 20.6–39.3 ================= -->
+<div class="abs t" style="left:60px;top:330px;width:960px;height:540px;--a:fade;--in:20.7s;--out:39.05s"><div class="tag">लोकतंत्र का मैदान</div></div>
+<div class="abs center t" style="top:1400px;font-size:74px;font-weight:900;color:rgba(243,239,230,.06);--a:fade;--in:20.8s;--out:29.9s">हम, भारत के लोग…</div>
+<!-- a: "लोकतंत्र में दलों… संसद और चुनाव के मैदान में" -->
+<div class="abs center h3 t" style="top:960px;color:var(--mute);--a:up;--in:20.9s;--out:25.9s">विचारों की लड़ाई कहाँ?</div>
+<div class="abs center t" style="top:1080px;--a:pop;--in:23.2s;--out:25.9s"><span class="pill">संसद</span><span class="pill">चुनाव</span></div>
+<!-- b: "सबसे बड़े संवैधानिक पद से जवानों के सामने" -->
+<div class="abs center h3 t" style="top:950px;--a:up;--in:26.2s;--out:29.9s">सबसे बड़ा <span class="amb">संवैधानिक पद</span></div>
+<div class="abs center t" style="top:1050px;font-size:80px;font-weight:900;color:var(--red);--a:fade;--in:27.6s;--out:29.9s">↓</div>
+<div class="abs center h2 t" style="top:1150px;--a:slam;--in:28.5s;--out:29.9s">जवानों के <span class="hl">सामने</span></div>
+<!-- c: "राजनीतिक दलों में दिमागी नक्सलियों ने घुसपैठ…" -->
+<div class="abs center h2 t" style="top:960px;--a:up;--in:30.1s;--out:34.5s">राजनीतिक दलों में</div>
+<div class="abs center h2 red t" style="top:1080px;font-size:104px;--a:slam;--in:31.6s;--out:34.5s">‘दिमागी नक्सली’?</div>
+<div class="abs center t" style="top:1250px;--a:pop;--in:32.6s;--out:34.5s"><span class="pill" style="font-size:44px">जवान</span><span style="font-size:44px;font-weight:900;color:var(--red)">vs</span><span class="pill r" style="font-size:44px">सियासत</span></div>
+<!-- d: "संस्थाओं की तटस्थता पर सवाल…" -->
+<div class="abs center h2 t" style="top:960px;--a:slam;--in:34.7s;--out:39.05s">संस्थाओं की</div>
+<div class="abs center h1 red t" style="top:1080px;--a:slam;--in:35.5s;--out:39.05s">तटस्थता?</div>
+<div class="abs t" style="left:300px;width:480px;top:1250px;height:10px;background:var(--red);transform-origin:left;--a:grow;--in:36.0s;--out:39.05s"></div>
+<div class="abs center h3 t" style="top:1300px;color:var(--mute);font-size:44px;--a:up;--in:36.8s;--out:39.05s">अराजनीतिक संस्थाएं · लोकतांत्रिक मर्यादा</div>
 
-<!-- a 18.3–22.6 -->
-<div class="abs center h3 t" style="top:960px;color:var(--mute);--a:up;--in:18.3s;--out:22.4s">विचारों की लड़ाई कहाँ?</div>
-<div class="abs center t" style="top:1080px;--a:pop;--in:19.2s;--out:22.4s"><span class="pill">संसद</span><span class="pill">चुनाव</span></div>
-<!-- b 22.6–26.4 -->
-<div class="abs center h3 t" style="top:950px;--a:up;--in:22.6s;--out:26.2s">सबसे बड़ा <span class="amb">संवैधानिक पद</span></div>
-<div class="abs center t" style="top:1050px;font-size:80px;font-weight:900;color:var(--red);--a:fade;--in:23.3s;--out:26.2s">↓</div>
-<div class="abs center h2 t" style="top:1150px;--a:slam;--in:23.8s;--out:26.2s">जवानों के <span class="hl">सामने</span></div>
-<!-- c 26.4–29.2 -->
-<div class="abs center t" style="top:900px;--a:left;--in:26.4s;--out:29s"><span class="h1">जवान</span></div>
-<div class="abs center t" style="top:1050px;font-size:64px;font-weight:900;color:var(--red);--a:slam;--in:26.8s;--out:29s">vs</div>
-<div class="abs center t" style="top:1130px;--a:right;--in:27.1s;--out:29s"><span class="h1 red">सियासत</span></div>
-<div class="abs center h3 t" style="top:1320px;color:var(--mute);font-size:48px;--a:up;--in:27.6s;--out:29s">अराजनीतिक संस्थाएं · लोकतांत्रिक मर्यादा</div>
-<!-- d 29.2–32 -->
-<div class="abs center h2 t" style="top:960px;--a:slam;--in:29.2s;--out:31.75s">संस्थाओं की</div>
-<div class="abs center h1 red t" style="top:1080px;--a:slam;--in:29.6s;--out:31.75s">तटस्थता?</div>
-<div class="abs t" style="left:300px;width:480px;top:1250px;height:10px;background:var(--red);transform-origin:left;--a:grow;--in:30.1s;--out:31.75s"></div>
-
-<!-- ================= S4 · CTA 32–42s ================= -->
-<div class="abs t" style="left:60px;top:250px;width:960px;height:900px;--a:fade;--in:32.1s"><div class="tag">● आपकी बात</div></div>
-<div class="abs t" style="left:60px;right:60px;top:1190px;--a:left;--in:32.5s;--out:36.8s">
-  <div class="h3">नक्सलवाद से लड़ना <span class="amb">→ जवानों का कर्तव्य</span></div>
-</div>
-<div class="abs t" style="left:60px;right:60px;top:1300px;--a:left;--in:34.6s;--out:36.8s">
-  <div class="h3">विरोधियों से निपटना <span class="red">→ लोकतंत्र का काम</span></div>
-</div>
-<div class="abs center h2 t" style="top:1180px;--a:slam;--in:37s">आपकी क्या राय है?</div>
-<div class="abs center t" style="top:1320px;--a:pop;--in:38.2s"><span class="pill" style="font-size:44px">हाँ, ठीक है</span><span class="pill r" style="font-size:44px">नहीं होना चाहिए</span></div>
-<div class="abs center t" style="top:1450px;font-size:42px;font-weight:700;color:var(--amber);--a:up;--in:39.2s">👇 कमेंट्स में बताइए</div>
+<!-- ================= S4 · CTA 39.3–59 ================= -->
+<div class="abs t" style="left:60px;top:250px;width:960px;height:900px;--a:fade;--in:39.4s"><div class="tag">● आपकी बात</div></div>
+<div class="abs t" style="left:60px;right:60px;top:1190px;--a:left;--in:39.6s;--out:46.2s"><div class="h3">नक्सलवाद से लड़ना <span class="amb">→ जवानों का कर्तव्य</span></div></div>
+<div class="abs t" style="left:60px;right:60px;top:1300px;--a:left;--in:44.0s;--out:46.2s"><div class="h3">विरोधियों से निपटना <span class="red">→ लोकतंत्र का काम</span></div></div>
+<div class="abs center h2 t" style="top:1180px;--a:slam;--in:46.4s;--out:53.8s">आपकी क्या राय है?</div>
+<div class="abs center t" style="top:1320px;--a:pop;--in:47.4s;--out:53.8s"><span class="pill" style="font-size:44px">हाँ, ठीक है</span><span class="pill r" style="font-size:44px">नहीं होना चाहिए</span></div>
+<div class="abs center t" style="top:1450px;font-size:42px;font-weight:700;color:var(--amber);--a:up;--in:50.6s;--out:53.8s">👇 कमेंट्स में बताइए</div>
+<div class="abs center t" style="top:1200px;--a:slam;--in:54.0s"><span style="display:inline-block;background:var(--red);color:#fff;border-radius:999px;padding:14px 56px 20px;font-weight:900;font-size:76px">Subscribe करें</span></div>
+<div class="abs center h3 t" style="top:1370px;--a:up;--in:56.3s">और <span class="amb">शेयर</span> करें ↗</div>
 
 <script>
 // hole-punch the backgrounds: rounded-rect holes via evenodd clip-path
