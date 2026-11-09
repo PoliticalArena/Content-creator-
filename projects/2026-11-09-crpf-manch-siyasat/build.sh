@@ -37,7 +37,7 @@ color=black:s=1080x1920:r=30:d=$DUR[bg];
 [t2][1:v]overlay=shortest=1,format=yuv420p[v]" -map "[v]" -c:v libx264 -preset medium -crf 18 -t $DUR "$W/picture.mp4"
 
 # 4) audio stems: PM clip, VO parts (light cleanup), BGM
-ffmpeg -v error -y -i "$RAW" -af "atrim=41.2:53.2,asetpts=PTS-STARTPTS,afade=t=in:d=0.15,afade=t=out:st=11.6:d=0.4,loudnorm=I=-16:TP=-1.5,adelay=8600|8600,apad=whole_dur=$DUR,aformat=sample_rates=48000:channel_layouts=stereo" "$W/pm.wav"
+ffmpeg -v error -y -i "$RAW" -af "atrim=41.2:53.2,asetpts=PTS-STARTPTS,afade=t=in:d=0.15,afade=t=out:st=11.6:d=0.4,loudnorm=I=-12.5:TP=-1.5,adelay=8600|8600,apad=whole_dur=$DUR,aformat=sample_rates=48000:channel_layouts=stereo" "$W/pm.wav"
 vo(){ echo "[0:a]atrim=$1:$2,asetpts=PTS-STARTPTS,afade=t=in:d=0.05,afade=t=out:st=$(echo "$2-$1-0.12"|bc):d=0.12,adelay=$3|$3[$4]"; }
 ffmpeg -v error -y -i "$VO" -filter_complex "
 $(vo 1.00 9.20 300 v1);$(vo 9.45 27.62 20900 v2);$(vo 27.95 46.85 39600 v3);
